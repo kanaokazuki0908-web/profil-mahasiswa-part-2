@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Mahasiswa</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    color: white;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    margin-bottom: 15px;
+    transition: transform 0.5s;
+}
+
+header img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
+    animation: slideUp 1.5s ease-in-out;
+}
+
+h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.skill {
+    margin: 10px 0;
+}
+
+.skill-bar {
+    width: 0;
+    height: 10px;
+    background: yellow;
+    border-radius: 10px;
+    transition: width 2s;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+form button {
+    background: #ffdd00;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: white;
+}
+
+.success-message {
+    display: none;
+    margin-top: 10px;
+    color: #00ffcc;
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background: rgba(0,0,0,0.3);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 600px) {
+    header img {
+        width: 120px;
+        height: 120px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://i.pravatar.cc/300" alt="Foto Profil">
+    <h1>Justin Christian Jazzer Paty Ani</h1>
+    <p>Mahasiswa Teknik Informatika</p>
+</header>
+
+<section>
+    <h2>Tentang Saya</h2>
+    <div class="card">
+        <p>
+            Saya adalah mahasiswa yang memiliki minat di bidang Web Development,
+            UI/UX Design, dan Artificial Intelligence.
+        </p>
+    </div>
+
+    <h2>Keahlian</h2>
+    <div class="card">
+        <div class="skill">
+            HTML
+            <div class="skill-bar" data-skill="90%"></div>
+        </div>
+        <div class="skill">
+            CSS
+            <div class="skill-bar" data-skill="85%"></div>
+        </div>
+        <div class="skill">
+            JavaScript
+            <div class="skill-bar" data-skill="80%"></div>
+        </div>
+    </div>
+
+    <h2>Kontak Saya</h2>
+    <div class="card">
+        <form id="contactForm">
+            <input type="text" id="nama" placeholder="Nama Lengkap" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <textarea id="pesan" rows="4" placeholder="Tulis pesan..." required></textarea>
+            <button type="submit">Kirim Pesan</button>
+            <div class="success-message" id="successMsg">
+                ✅ Pesan berhasil dikirim!
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 Profil Mahasiswa | Dibuat dengan ❤️
+</footer>
+
+<script>
+// Animasi skill bar
+window.addEventListener("load", function() {
+    const skills = document.querySelectorAll(".skill-bar");
+    skills.forEach(skill => {
+        skill.style.width = skill.getAttribute("data-skill");
+    });
+});
+
+// Validasi & Simulasi kirim email
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById("nama").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const pesan = document.getElementById("pesan").value.trim();
+    const successMsg = document.getElementById("successMsg");
+
+    if(nama === "" || email === "" || pesan === "") {
+        alert("Semua field wajib diisi!");
+        return;
+    }
+
+    successMsg.style.display = "block";
+
+    // Reset form setelah 2 detik
+    setTimeout(() => {
+        document.getElementById("contactForm").reset();
+        successMsg.style.display = "none";
+    }, 2000);
+});
+</script>
+
+</body>
+</html>
